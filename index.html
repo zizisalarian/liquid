@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Liquid</title>
+</head>
+<body>
+    <div class="circle"></div>
+    <svg>
+        <filter id="gooey">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+            <feColorMatrix values="1 0 0 0 0 
+                                    0 1 0 0 0
+                                    0 0 1 0 0
+                                    0 0 0 50 -10"/>
+        </filter>
+    </svg>
+
+    <script>
+        let circleElem = document.querySelector('.circle')
+        circleElem.addEventListener('click' , ()=>{
+            for(let i=0 ; i<50 ; i++){
+
+                let smallCircle = document.createElement('i')
+                smallCircle.classList.add('small-circle')
+                document.body.appendChild(smallCircle)
+
+                let positionX = (Math.random()-0.5)*window.innerWidth
+                let positionY = (Math.random()-0.5)*window.innerHeight
+                let smallCircleSize = Math.random() *60 +10  
+                let duration = Math.random() * 3 + 2
+
+                smallCircle.style.setProperty('--x' , positionX + 'px')
+                smallCircle.style.setProperty('--y' , positionY + 'px')
+                smallCircle.style.width = smallCircleSize + 'px'
+                smallCircle.style.animation = `animate ${duration}s ease forwards`
+
+
+                setTimeout(() => {
+                    smallCircle.remove()
+                }, 5000);
+            }
+
+
+
+        })
+    </script>
+</body>
+</html>
